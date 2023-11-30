@@ -48,31 +48,57 @@ public class TrueGui extends JFrame {
     private JTextField textField37;
     private JTextField textField38;
     private JTextField textField39;
+    private JTextField textField40;
+    private JTextField textField41;
+    private JTextField textField42;
+    private JTextField textField43;
+    private JTextField textField44;
+    private JTextField textField45;
+    private JTextField textField46;
+    private JTextField textField47;
+    private JTextField textField48;
+    private JTextField textField49;
+    private JTextField textField50;
+    private JTextField textField51;
+    private JTextField textField52;
+    private JTextField textField53;
+    private JTextField textField54;
+    private JTextField textField55;
+    private JTextField textField56;
+    private JTextField textField57;
+    private JTextField textField58;
+    private JTextField textField59;
+    private JTextField textField60;
+    private JTextField textField61;
+    private JTextField textField62;
+    private JTextField textField63;
+    private JTextField textField64;
 
     public static ArrayList<String> aryL = new ArrayList<>();
     public static ArrayList<String> listArray = new ArrayList<>();
     public static Scanner sc;
-    public static String url ="src/Materiallista.json";
+    public static String url ="src/sample.json";
+    public static JFileChooser j = new JFileChooser("src");
     private int amountOfCol = 0, amountOfRow = 0 ;
 
     TrueGui() {
         try {
-            JFileChooser j = new JFileChooser("src");
+
             j.showOpenDialog(null);
             System.out.println(j.getSelectedFile().getPath());
             url = j.getSelectedFile().getPath();
-            aryL = url;
         } catch (Exception e){
             System.out.println("no file buddy");
         }
-
+if (j.getSelectedFile().getPath().equals("/Users/samoswise/IdeaProjects/ObjektivAssignment/src/sample.json")) {
+    //System.out.println("hello");
         try{
             File f = new File(url);
             sc = new Scanner(f);
             String page = "";
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                System.out.println(line);
+               // System.out.println(line);
                 page+= line;
                 //System.out.println(line.length());
             }
@@ -96,7 +122,8 @@ public class TrueGui extends JFrame {
                 alphabet.add(String.valueOf(j.get("H")));
                Collections.sort(alphabet);
                listArray.addAll(alphabet);
-                System.out.println(alphabet);
+
+                //System.out.println(listArray);
             }
 
         }catch (Exception e){
@@ -106,9 +133,33 @@ public class TrueGui extends JFrame {
 
         int i=0;
         for (Component jt : panel.getComponents()) {
-             ((JTextField)jt).setText(url);
+             ((JTextField)jt).setText(listArray.get(i));
+            i++;
+        }}
+else {
+
+    try{  System.out.println("hello hello this is me");
+        File f = new File(url);
+        sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] array = line.split(",", 8);
+            //  System.out.println(array[0]);
+            listArray.addAll(Arrays.asList(array));
+           // System.out.println(listArray);
+            //  System.out.println(line);
+
+        }  int i=0;
+        for (Component jt : panel.getComponents()) {
+            ((JTextField)jt).setText(listArray.get(i));
             i++;
         }
+    }catch (Exception e){
+        System.out.println("ERROR"+e.toString());
+    }
+
+    sc.close();
+}
         // ska form aktivera
         setContentPane(panel);
         setTitle("test");
@@ -120,22 +171,8 @@ public class TrueGui extends JFrame {
     }
 
     public static void main(String[] args) {
-        try{
-            File f = new File(url);
-            sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                String[] array = line.split(",", 3);
-                //  System.out.println(array[0]);
-                listArray.addAll(Arrays.asList(array));
-                System.out.println(Arrays.deepToString(array));
-                //  System.out.println(line);
-            }
-        }catch (Exception e){
-            System.out.println("ERROR"+e.toString());
-        }
+
         new TrueGui();
-        sc.close();
     }
     }
 
