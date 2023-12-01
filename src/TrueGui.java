@@ -82,8 +82,6 @@ public class TrueGui extends JFrame {
     private int amountOfCol = 0, amountOfRow = 0 ;
 
     TrueGui() {
-
-
         try {
 
             j.showOpenDialog(null);
@@ -92,93 +90,100 @@ public class TrueGui extends JFrame {
         } catch (Exception e){
             System.out.println("no file buddy");
         }
-if (j.getSelectedFile().getPath().equals("/Users/samoswise/IdeaProjects/ObjektivAssignment/src/sample.json")) {
-    //System.out.println("hello");
-        try{
-            File f = new File(url);
-            sc = new Scanner(f);
-            String page = "";
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-               // System.out.println(line);
-                page+= line;
-                //System.out.println(line.length());
+        if (j.getSelectedFile().getPath().equals("/Users/samoswise/IdeaProjects/ObjektivAssignment/src/sample.json")) {
+            //System.out.println("hello");
+            try{
+                File f = new File(url);
+                sc = new Scanner(f);
+                String page = "";
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                    // System.out.println(line);
+                    page+= line;
+                    //System.out.println(line.length());
+                }
+                sc.close();
+                JsonValue jv = Json.parse(page);
+                JsonArray ja = jv.asArray();
+                //JsonObject jo =  ja.get(0).asObject();
+                //System.out.println(jo.names().size());
+                for (int i = 0 ;  i < ja.size() -1; i++) {
+                    // System.out.println(array[i]+"\n");
+                    JsonObject j = ja.get(i).asObject();
+
+                    ArrayList<String>alphabet = new ArrayList<>();
+                    alphabet.add(String.valueOf(j.get("A")));
+                    alphabet.add(String.valueOf(j.get("B")));
+                    alphabet.add(String.valueOf(j.get("C")));
+                    alphabet.add(String.valueOf(j.get("D")));
+                    alphabet.add(String.valueOf(j.get("E")));
+                    alphabet.add(String.valueOf(j.get("F")));
+                    alphabet.add(String.valueOf(j.get("G")));
+                    alphabet.add(String.valueOf(j.get("H")));
+                    Collections.sort(alphabet);
+                    listArray.addAll(alphabet);
+
+                    //System.out.println(listArray);
+                }
+                panel.removeAll();
+                panel= new JPanel();
+                panel.setLayout(new GridLayout(44,8));
+                setContentPane(panel);
+                for (var s:
+                        listArray) {
+                    JTextField jt= new JTextField();
+                    panel.add(jt);
+
+                }
+            }catch (Exception e){
+                System.out.println("ERROR"+e.toString());
             }
+
+
+            int i=0;
+            for (Component jt : panel.getComponents()) {
+                ((JTextField)jt).setText(listArray.get(i).replaceAll("\"", ""));
+                i++;
+            }}
+
+        else {
+
+            try{  System.out.println("hello hello this is me");
+                File f = new File(url);
+                sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                    String[] array = line.split(",", 8);
+                    //  System.out.println(array[0]);
+                    listArray.addAll(Arrays.asList(array));
+                    // System.out.println(listArray);
+                    //  System.out.println(line);
+
+                }  int i=0;
+                panel.removeAll();
+                panel= new JPanel();
+                panel.setLayout(new GridLayout(44,8));
+                setContentPane(panel);
+                for (var s:
+                        listArray) {
+                    JTextField jt= new JTextField();
+
+                    panel.add(jt);
+
+                }
+                panel.setVisible(true);
+                //-----------------------------------
+
+                for (Component jt : panel.getComponents()) {
+                    ((JTextField)jt).setText(listArray.get(i));
+                    i++;
+                }
+            }catch (Exception e){
+                System.out.println("ERROR"+e.toString());
+            }
+
             sc.close();
-            JsonValue jv = Json.parse(page);
-            JsonArray ja = jv.asArray();
-            //JsonObject jo =  ja.get(0).asObject();
-            //System.out.println(jo.names().size());
-            for (int i = 0 ;  i < ja.size() -1; i++) {
-                // System.out.println(array[i]+"\n");
-                JsonObject j = ja.get(i).asObject();
-
-                ArrayList<String>alphabet = new ArrayList<>();
-                alphabet.add(String.valueOf(j.get("A")));
-                alphabet.add(String.valueOf(j.get("B")));
-                alphabet.add(String.valueOf(j.get("C")));
-                alphabet.add(String.valueOf(j.get("D")));
-                alphabet.add(String.valueOf(j.get("E")));
-                alphabet.add(String.valueOf(j.get("F")));
-                alphabet.add(String.valueOf(j.get("G")));
-                alphabet.add(String.valueOf(j.get("H")));
-               Collections.sort(alphabet);
-               listArray.addAll(alphabet);
-
-                //System.out.println(listArray);
-            }
-
-        }catch (Exception e){
-            System.out.println("ERROR"+e.toString());
         }
-
-
-        int i=0;
-        for (Component jt : panel.getComponents()) {
-             ((JTextField)jt).setText(listArray.get(i));
-            i++;
-        }}
-else {
-
-    try{  System.out.println("hello hello this is me");
-        File f = new File(url);
-        sc = new Scanner(f);
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
-            String[] array = line.split(",", 8);
-            //  System.out.println(array[0]);
-            listArray.addAll(Arrays.asList(array));
-           // System.out.println(listArray);
-            //  System.out.println(line);
-
-        }  int i=0;
-        /*****************************
-                 Author : Alrik He
-                 Date: 2023
-         *******************************/
-                    panel.removeAll();
-                    panel= new JPanel();
-                    setContentPane(panel);
-                    for (var s:
-                    listArray) {
-                        JTextField jt= new JTextField("hello");
-                        panel.add(jt);
-
-                    }
-                    panel.setVisible(true);
-        //-----------------------------------
-
-        for (Component jt : panel.getComponents()) {
-            ((JTextField)jt).setText(listArray.get(i));
-            i++;
-        }
-    }catch (Exception e){
-        System.out.println("ERROR"+e.toString());
-    }
-
-    sc.close();
-}
-
 
         // ska form aktivera
         setContentPane(panel);
@@ -188,13 +193,10 @@ else {
         setLocationRelativeTo(null);
         setVisible(true);
 
-
     }
 
     public static void main(String[] args) {
 
         new TrueGui();
-
     }
-    }
-
+}
