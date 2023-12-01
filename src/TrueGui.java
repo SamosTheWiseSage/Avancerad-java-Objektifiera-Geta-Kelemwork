@@ -82,6 +82,8 @@ public class TrueGui extends JFrame {
     private int amountOfCol = 0, amountOfRow = 0 ;
 
     TrueGui() {
+
+
         try {
 
             j.showOpenDialog(null);
@@ -150,6 +152,22 @@ else {
             //  System.out.println(line);
 
         }  int i=0;
+        /*****************************
+                 Author : Alrik He
+                 Date: 2023
+         *******************************/
+                    panel.removeAll();
+                    panel= new JPanel();
+                    setContentPane(panel);
+                    for (var s:
+                    listArray) {
+                        JTextField jt= new JTextField("hello");
+                        panel.add(jt);
+
+                    }
+                    panel.setVisible(true);
+        //-----------------------------------
+
         for (Component jt : panel.getComponents()) {
             ((JTextField)jt).setText(listArray.get(i));
             i++;
@@ -160,6 +178,8 @@ else {
 
     sc.close();
 }
+
+
         // ska form aktivera
         setContentPane(panel);
         setTitle("test");
@@ -168,11 +188,13 @@ else {
         setLocationRelativeTo(null);
         setVisible(true);
 
+
     }
 
     public static void main(String[] args) {
 
         new TrueGui();
+
     }
     }
 
