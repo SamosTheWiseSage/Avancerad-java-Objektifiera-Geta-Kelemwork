@@ -90,6 +90,19 @@ public class TrueGui extends JFrame {
         } catch (Exception e){
             System.out.println("no file buddy");
         }
+        read();
+
+        // ska form aktivera
+        setContentPane(panel);
+        setTitle("test");
+        setSize(500, 500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+    }
+
+    private void read() {
         if (j.getSelectedFile().getPath().equals("/Users/samoswise/IdeaProjects/ObjektivAssignment/src/sample.json")) {
             //System.out.println("hello");
             try{
@@ -184,15 +197,6 @@ public class TrueGui extends JFrame {
 
             sc.close();
         }
-
-        // ska form aktivera
-        setContentPane(panel);
-        setTitle("test");
-        setSize(500, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-
     }
 
     public static void main(String[] args) {
